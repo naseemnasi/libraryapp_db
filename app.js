@@ -14,22 +14,24 @@ app.use(bodyParser.urlencoded({
   }));
 
 
-var nav=[{link:"/",title:'Home'},
+var nav=[   {link:"/",title:'Home'},
             {link:"/login",title:'LogIn'},
-            {link:"/signup",title:'SignUp'},
+            {link:"/signup",title:'signup'},
             {link:"/books",title:'Books'},
             {link:"/authors",title:'Authors'},
             {link:"/books/add",title:'AddBooks'},
             {link:"/authors/add",title:"AddAuthors"},
            ];
 
-
-
+var bb= "xghcgh";
 
 const booksRouter=require('./src/routes/bookRoutes')(nav);//passing nav to booksRouter
 const authorRouter=require('./src/routes/authorRouter')(nav);
 const signupRouter=require('./src/routes/signupRouter')(nav);
 const loginRouter=require('./src/routes/loginRouter')(nav);
+
+app.set('views','./src/views');
+app.set('view engine','ejs');
 
 /* without view engine*/
 // app.use(express.static(path.join(__dirname,"/public")));
@@ -74,8 +76,7 @@ db.once('open',()=>{
   console.log("Success");
 })
 
-app.set('views','./src/views');
-app.set('view engine','ejs');
+
 // app.get('/',function(req,res){
 //     res.render('index.ejs',{list:['book1','book2','book3'],title:"Library"});
 
@@ -90,7 +91,8 @@ app.get('/',function(req,res){
 res.render('index.ejs',
 {
 nav,
-title:"Library"
+title:"Library",
+// bb
 }
 )});
 app.listen(process.env.PORT || 3000,()=>{
